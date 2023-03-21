@@ -22,7 +22,7 @@
         "functions": "never"
       }
     ],
-    "react/prop-types": [2, { "skiUndeclared": true }]
+    "react/prop-types": ["off"]
   },
   "parserOptions": {
     "ecmaVersion": 2020,
