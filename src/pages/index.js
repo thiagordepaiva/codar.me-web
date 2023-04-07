@@ -1,18 +1,12 @@
 import * as React from "react";
-import styled from "styled-components";
 
-import { Theme } from "./../components/Theme";
+import { Theme } from "~/components";
+import { Signup } from "./Signup";
 
-function getColor(props) {
-  return props.theme.colors.green;
-}
-
-const Button = styled.a`
-  background: ${getColor};
-`;
-
-export const App = () => (
-  <Theme>
-    <Button>Meu App</Button>
-  </Theme>
-);
+export const App = () => {
+  return (
+    <Theme>
+      <Signup />
+    </Theme>
+  );
+};
