@@ -4,6 +4,7 @@ const baseColors = {
   green: "#0BD9B3",
   blue: "#487FD9",
   yellow: "#EBC455",
+  gray: "#cccccc",
 };
 
 const brandColors = {
