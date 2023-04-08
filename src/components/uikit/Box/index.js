@@ -5,6 +5,7 @@ import {
   padding,
   margin,
   flexBox,
+  font,
 } from "~/components/Theme/styled";
 
 export const Box = styled("div")`
@@ -12,4 +13,5 @@ export const Box = styled("div")`
   ${padding}
   ${margin}
   ${flexBox}
+  ${font}
 `;

@@ -46,6 +46,7 @@ export const Signup = () => {
             label="E-mail"
             onChange={onChange}
             disabled={loading}
+            error={"Ops, algo deu errado!"}
             mb={3}
           />
           <Field

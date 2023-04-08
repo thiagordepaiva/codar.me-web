@@ -17,7 +17,7 @@ const colors = {
   ...brandColors,
 };
 
-const fontSizes = [10, 12, 14, 16, 18, 21];
+const fontSizes = [10, 12, 14, 16, 18, 21, 24, 27, 30, 34, 38, 42];
 const spaces = [4, 8, 12, 16, 20, 24, 28, 32, 64, 128];
 
 export const definitions = {

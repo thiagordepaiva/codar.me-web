@@ -6,40 +6,48 @@ export const th = {
   color: theme("colors"),
 };
 
-const genPropCss = (propCss, theme, propComp) => props =>
-  props[propComp] && `${propCss}: ${props.theme[theme][props[propComp]]};`;
+export const background = props =>
+  props.bg && `background: ${props.theme.colors[props.bg]};`;
 
-export const background = genPropCss("background", "colors", "bg");
-export const fontSize = genPropCss("font-size", "fontSizes", "fontSize");
+export const font = props => {
+  const color =
+    props.color && `color: ${props.theme.colors[props.color] || props.color};`;
 
-export const color = props =>
-  props.color && `color: ${props.theme.colors[props.color] || props.color};`;
-
-export const margin = props => {
-  const mb = props.mb || props.my || props.m;
-  const mt = props.mt || props.my || props.m;
-  const ml = props.ml || props.mx || props.m;
-  const mr = props.mr || props.mx || props.m;
+  const size =
+    Object.prototype.hasOwnProperty.call(props, "fontSize") &&
+    `font-size: ${props.theme.fontSizes[props.fontSize]}px;`;
 
   return `
-    ${mb ? `margin-bottom: ${props.theme.spaces[mb]}px;` : ``}
-    ${mt ? `margin-top: ${props.theme.spaces[mt]}px;` : ``}
-    ${ml ? `margin-left: ${props.theme.spaces[ml]}px;` : ``}
-    ${mr ? `margin-rigth: ${props.theme.spaces[mr]}px;` : ``}
+    ${color ? color : ""}
+    ${size ? size : ""}
+  `;
+};
+
+export const margin = props => {
+  const mb = props.mb ?? props.my ?? props.m;
+  const mt = props.mt ?? props.my ?? props.m;
+  const ml = props.ml ?? props.mx ?? props.m;
+  const mr = props.mr ?? props.mx ?? props.m;
+
+  return `
+    ${mb !== "" ? `margin-bottom: ${props.theme.spaces[mb]}px;` : ""}
+    ${mt !== "" ? `margin-top: ${props.theme.spaces[mt]}px;` : ""}
+    ${ml !== "" ? `margin-left: ${props.theme.spaces[ml]}px;` : ""}
+    ${mr !== "" ? `margin-rigth: ${props.theme.spaces[mr]}px;` : ""}
   `;
 };
 
 export const padding = props => {
-  const pb = props.pb || props.py || props.p;
-  const pt = props.pt || props.py || props.p;
-  const pl = props.pl || props.px || props.p;
-  const pr = props.pr || props.px || props.p;
+  const pb = props.pb ?? props.py ?? props.p;
+  const pt = props.pt ?? props.py ?? props.p;
+  const pl = props.pl ?? props.px ?? props.p;
+  const pr = props.pr ?? props.px ?? props.p;
 
   return `
-    ${pb ? `padding-bottom: ${props.theme.spaces[pb]}px;` : ``}
-    ${pt ? `padding-top: ${props.theme.spaces[pt]}px;` : ``}
-    ${pl ? `padding-left: ${props.theme.spaces[pl]}px;` : ``}
-    ${pr ? `padding-rigth: ${props.theme.spaces[pr]}px;` : ``}
+    ${pb !== "" ? `padding-bottom: ${props.theme.spaces[pb]}px;` : ""}
+    ${pt !== "" ? `padding-top: ${props.theme.spaces[pt]}px;` : ""}
+    ${pl !== "" ? `padding-left: ${props.theme.spaces[pl]}px;` : ""}
+    ${pr !== "" ? `padding-rigth: ${props.theme.spaces[pr]}px;` : ""}
   `;
 };
 
