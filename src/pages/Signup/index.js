@@ -21,7 +21,7 @@ const validationSchema = yup.object().shape({
 });
 
 export const Signup = () => {
-  const onSubmit = async () => {
+  const onSubmit = async values => {
     try {
       await axios.post("http://localhost:3001/users", values);
     } catch (error) {
@@ -47,6 +47,10 @@ export const Signup = () => {
     },
   });
 
+  /**
+   * @Todo fazer a aula 'Finalizando a Tela de Cadastro' do modulo 9
+   * Para terminar a tela de SignUp
+   */
   return (
     <Box flex={1} flexBox="column" center>
       <Box style={{ width: 380 }}>
@@ -95,7 +99,7 @@ export const Signup = () => {
               Registrar
             </Button>
 
-            <Link href="#" m={1} fontSize={1} color="gray" fontWeigth="bold">
+            <Link href="#" m={1} fontSize={1} color="gray" fontWeight="bold">
               Já sou cadastrado
             </Link>
           </Box>
