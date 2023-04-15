@@ -13,15 +13,17 @@ const validationSchema = yup.object().shape({
   password: yup.string().required("A senha e obrigatória"),
 });
 
-export const Login = () => {
+export const Login = ({ onSuccess }) => {
   const onSubmit = async values => {
     try {
-      await axios.get("http://localhost:3001/login", {
+      const res = await axios.get("http://localhost:3001/login", {
         auth: {
           username: values.email,
           password: values.password,
         },
       });
+
+      onSuccess(res.data);
     } catch (error) {
       console.log("Error:" + error);
     }
@@ -47,7 +49,6 @@ export const Login = () => {
   /**
    * @Todo
    * Fazer a aula 'Finalizando a Tela de Cadastro' do modulo 9 para terminar a tela de Login
-   * Verificar pq o bold da font não esta funcionando
    */
   return (
     <Box flex={1} flexBox="column" center>
