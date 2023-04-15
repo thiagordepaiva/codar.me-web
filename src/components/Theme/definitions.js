@@ -4,7 +4,7 @@ const baseColors = {
   green: "#0BD9B3",
   blue: "#487FD9",
   yellow: "#EBC455",
-  gray: "#cccccc",
+  gray: "#A0A2AE",
 };
 
 const brandColors = {
@@ -17,7 +17,7 @@ const colors = {
   ...brandColors,
 };
 
-const fontSizes = [10, 12, 14, 16, 18, 21, 24, 27, 30, 34, 38, 42];
+const fontSizes = [10, 12, 14, 16, 18, 21, 24, 27, 30, 36, 42, 48];
 const spaces = [4, 8, 12, 16, 20, 24, 28, 32, 64, 128];
 
 export const definitions = {

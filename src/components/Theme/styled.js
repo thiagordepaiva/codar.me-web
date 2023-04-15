@@ -20,6 +20,8 @@ export const font = props => {
   return `
     ${color ? color : ""}
     ${size ? size : ""}
+    ${props.textAlign ? `text-align: ${props.textAlign};` : ""}
+    ${props.fontWeigth ? `font-weigth: ${props.fontWeigth};` : ""}
   `;
 };
 
@@ -60,10 +62,10 @@ export const flexBox = props => {
   const alignItems = props.alignItems || (props.center && "center");
 
   return `
-    ${(props.flex && `flex: ${props.flex};`) || ""}
-    ${(props.flexBox && "display: flex;") || ""}
-    ${direction && `flex-direction: ${direction};`}
-    ${(justifyContent && `justify-content: ${justifyContent};`) || ""}
-    ${(alignItems && `align-items: ${alignItems};`) || ""}
+    ${props.flex ? `flex: ${props.flex};` : ""}
+    ${props.flexBox ? "display: flex;" : ""}
+    ${direction ? `flex-direction: ${direction};` : ""}
+    ${justifyContent ? `justify-content: ${justifyContent};` : ""}
+    ${alignItems ? `align-items: ${alignItems};` : ""}
   `;
 };

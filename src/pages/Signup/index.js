@@ -3,7 +3,7 @@ import axios from "axios";
 import * as yup from "yup";
 import { useFormik } from "formik";
 
-import { Box, Button, Field } from "~/components";
+import { Box, Button, Field, Title, Link } from "~/components";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -49,8 +49,10 @@ export const Signup = () => {
 
   return (
     <Box flex={1} flexBox="column" center>
-      <form onSubmit={handleSubmit}>
-        <Box style={{ width: 380 }}>
+      <Box style={{ width: 380 }}>
+        <Title textAlign={"center"}>Cadastro</Title>
+
+        <form onSubmit={handleSubmit}>
           <Field
             type="text"
             name="name"
@@ -88,13 +90,17 @@ export const Signup = () => {
             mb={3}
           />
 
-          <Box flexBox center>
-            <Button type="submit" loading={isSubmitting}>
+          <Box flexBox="column" center>
+            <Button type="submit" loading={isSubmitting} m={1}>
               Registrar
             </Button>
+
+            <Link href="#" m={1} fontSize={1} color="gray" fontWeigth="bold">
+              Já sou cadastrado
+            </Link>
           </Box>
-        </Box>
-      </form>
+        </form>
+      </Box>
     </Box>
   );
 };
