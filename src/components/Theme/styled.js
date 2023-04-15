@@ -21,7 +21,7 @@ export const font = props => {
     ${color ? color : ""}
     ${size ? size : ""}
     ${props.textAlign ? `text-align: ${props.textAlign};` : ""}
-    ${props.fontWeigth ? `font-weigth: ${props.fontWeigth};` : ""}
+    ${props.fontWeight ? `font-weight: ${props.fontWeight};` : ""}
   `;
 };
 
