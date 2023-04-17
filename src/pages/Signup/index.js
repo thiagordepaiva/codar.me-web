@@ -99,7 +99,7 @@ export const Signup = () => {
               Registrar
             </Button>
 
-            <Link href="#" m={1} fontSize={1} color="gray" fontWeight="bold">
+            <Link to="/" m={1} fontSize={1} color="gray" fontWeight="bold">
               Já sou cadastrado
             </Link>
           </Box>
