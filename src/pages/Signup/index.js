@@ -2,8 +2,9 @@ import * as React from "react";
 import axios from "axios";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import { Box, Button, Field, Title, Link } from "~/components";
+import { Box, Button, Field, Title, Link, useAuth } from "~/components";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -21,9 +22,19 @@ const validationSchema = yup.object().shape({
 });
 
 export const Signup = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [, { login: setAuth }] = useAuth();
+
+  const { from } = location.state || { from: { pathname: "/" } };
+
   const onSubmit = async values => {
     try {
-      await axios.post("http://localhost:3001/users", values);
+      const res = await axios.post("http://localhost:3001/users", values);
+
+      setAuth(res.data);
+
+      navigate(from, { replace: true });
     } catch (error) {
       console.log("Error:" + error);
     }
@@ -99,7 +110,7 @@ export const Signup = () => {
               Registrar
             </Button>
 
-            <Link href="#" m={1} fontSize={1} color="gray" fontWeight="bold">
+            <Link to="/" m={1} fontSize={1} color="gray" fontWeight="bold">
               Já sou cadastrado
             </Link>
           </Box>

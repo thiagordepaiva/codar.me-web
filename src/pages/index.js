@@ -1,31 +1,27 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Theme } from "~/components";
+import { useAuth } from "~/components/modules/Auth";
 
 import { Login } from "./Login";
+import { Signup } from "./Signup";
 import { Dashboard } from "./Dashboard";
 
+const LoggedInRouters = () => (
+  <Routes>
+    <Route path="/" element={<Dashboard />} />
+  </Routes>
+);
+
+const AuthRouters = () => (
+  <Routes>
+    <Route path="/" element={<Login />} />
+    <Route path="/signup" element={<Signup />} />
+  </Routes>
+);
+
 export const App = () => {
-  const [state, setState] = useState(() => {
-    const data = window.localStorage.getItem("auth");
+  const [auth] = useAuth();
 
-    return data && JSON.parse(data);
-  });
-
-  const logout = () => setState(false);
-
-  useEffect(() => {
-    window.localStorage.setItem("auth", state && JSON.stringify(state));
-  }, [state]);
-
-  return (
-    <Theme>
-      {state?.user ? (
-        <Dashboard onLogout={logout} />
-      ) : (
-        <Login onSuccess={setState} />
-      )}
-    </Theme>
-  );
+  return <Router>{auth?.user ? <LoggedInRouters /> : <AuthRouters />}</Router>;
 };

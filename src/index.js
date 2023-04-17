@@ -1,13 +1,20 @@
 import * as React from "react";
 import ReactDOM from "react-dom/client";
 
+import { Theme } from "~/components/Theme";
+import { AuthProvider } from "~/components/modules/Auth";
+
 import reportWebVitals from "./reportWebVitals";
 import { App } from "./pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Theme>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </Theme>
   </React.StrictMode>
 );
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import * as yup from "yup";
 import { useFormik } from "formik";
 
-import { Box, Button, Field, Title, Link } from "~/components";
+import { Box, Button, Field, Title, Link, useAuth } from "~/components";
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -13,7 +13,9 @@ const validationSchema = yup.object().shape({
   password: yup.string().required("A senha e obrigatória"),
 });
 
-export const Login = ({ onSuccess }) => {
+export const Login = () => {
+  const [, { login: setAuth }] = useAuth();
+
   const onSubmit = async values => {
     try {
       const res = await axios.get("http://localhost:3001/login", {
@@ -23,7 +25,7 @@ export const Login = ({ onSuccess }) => {
         },
       });
 
-      onSuccess(res.data);
+      setAuth(res.data);
     } catch (error) {
       console.log("Error:" + error);
     }
@@ -88,7 +90,7 @@ export const Login = ({ onSuccess }) => {
 
             <Box m={1} fontSize={1} color="gray">
               Não Possui cadastro?{" "}
-              <Link href="#" color="gray" fontWeight="bold">
+              <Link to="/signup" color="gray" fontWeight="bold">
                 Cadastre-se!
               </Link>
             </Box>

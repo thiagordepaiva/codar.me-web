@@ -1,12 +1,14 @@
 import * as React from "react";
 
-import { Box, Button } from "~/components";
+import { Box, Button, useAuth } from "~/components";
 
-export const Dashboard = ({ onLogout }) => {
+export const Dashboard = () => {
+  const [auth, { logout }] = useAuth();
+
   return (
     <Box flex={1} flexBox="column" center>
-      Estou logado
-      <Button onClick={onLogout}>Sair</Button>
+      Olá {auth.user.name}, você esta logado
+      <Button onClick={logout}>Sair</Button>
     </Box>
   );
 };
