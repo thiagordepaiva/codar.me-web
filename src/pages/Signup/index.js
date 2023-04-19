@@ -72,7 +72,7 @@ export const Signup = () => {
             type="text"
             name="name"
             label="Nome"
-            placeholder="Nome"
+            placeholder="Digite seu nome"
             value={values.name}
             error={touched.name && errors.name}
             onChange={handleChange}
@@ -84,7 +84,7 @@ export const Signup = () => {
             type="text"
             name="email"
             label="E-mail"
-            placeholder="E-mail"
+            placeholder="Digite seu e-mail"
             value={values.email}
             error={touched.email && errors.email}
             onChange={handleChange}
@@ -96,7 +96,7 @@ export const Signup = () => {
             type="password"
             name="password"
             label="Senha"
-            placeholder="Senha"
+            placeholder="Digite sua senha"
             value={values.password}
             error={touched.password && errors.password}
             onChange={handleChange}

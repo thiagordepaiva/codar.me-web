@@ -62,7 +62,7 @@ export const Login = () => {
             type="text"
             name="email"
             label="E-mail"
-            placeholder="E-mail"
+            placeholder="Digite seu e-mail"
             value={values.email}
             error={touched.email && errors.email}
             onChange={handleChange}
@@ -74,7 +74,7 @@ export const Login = () => {
             type="password"
             name="password"
             label="Senha"
-            placeholder="Senha"
+            placeholder="Digite sua senha"
             value={values.password}
             error={touched.password && errors.password}
             onChange={handleChange}
