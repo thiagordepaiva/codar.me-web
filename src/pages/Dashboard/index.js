@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { th, Title } from "~/components";
+import { Logo } from "~/components";
 
 const Container = styled("div")`
   display: flex;
@@ -21,7 +22,9 @@ const Main = styled("main")`
 
 const Layout = ({ children }) => (
   <Container>
-    <Menu>Menu</Menu>
+    <Menu>
+      <Logo />
+    </Menu>
     <Main>{children}</Main>
   </Container>
 );
