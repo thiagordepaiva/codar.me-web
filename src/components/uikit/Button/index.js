@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { th, margin } from "~/components/Theme/styled";
 
+import { Spinner } from "../Spinner";
+
 const StyledButton = styled("button")`
   background: ${th.color("white")};
   border: none;
@@ -18,6 +20,6 @@ const StyledButton = styled("button")`
 
 export const Button = ({ disabled, loading, children, ...props }) => (
   <StyledButton {...props} disabled={disabled || loading}>
-    {loading ? "Loading..." : children}
+    {loading ? <Spinner /> : children}
   </StyledButton>
 );
