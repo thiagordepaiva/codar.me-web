@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { th, Title } from "~/components";
+import { th, Title, Button, useAuth } from "~/components";
 import { Logo } from "~/components";
 
 const Container = styled("div")`
@@ -30,15 +30,13 @@ const Layout = ({ children }) => (
 );
 
 export const Dashboard = () => {
-  //const [auth, { logout }] = useAuth();
+  const [auth, { logout }] = useAuth();
 
   return (
-    /*<Box flex={1} flexBox="column" center>
-      Olá {auth.user.name}, você esta logado
-      <Button onClick={logout}>Sair</Button>
-    </Box>*/
     <Layout>
       <Title>Dashboard</Title>
+      <Title>{auth.user.name}</Title>
+      <Button onClick={logout}>Sair</Button>
     </Layout>
   );
 };
