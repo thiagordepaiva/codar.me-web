@@ -30,5 +30,10 @@
     "ecmaFeatures": {
       "jsx": true
     }
+  },
+  "globals": {
+    "document": true,
+    "foo": true,
+    "window": true
   }
 }
