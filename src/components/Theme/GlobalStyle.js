@@ -3,8 +3,6 @@ import { createGlobalStyle } from "styled-components";
 import { background, font } from "./styled";
 
 export const GlobalStyle = createGlobalStyle`
-  @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap");
-
   * {
     font-family: Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI",
       "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
