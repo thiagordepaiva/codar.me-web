@@ -27,7 +27,7 @@ export const Login = () => {
 
       setAuth(res.data);
     } catch (error) {
-      console.log("Error:" + error);
+      console.log("Error: ", error);
     }
   };
 

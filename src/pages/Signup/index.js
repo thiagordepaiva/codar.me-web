@@ -36,7 +36,7 @@ export const Signup = () => {
 
       navigate(from, { replace: true });
     } catch (error) {
-      console.log("Error:" + error);
+      console.log("Error: ", error);
     }
   };
 
