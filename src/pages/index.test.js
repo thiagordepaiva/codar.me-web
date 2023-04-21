@@ -46,17 +46,15 @@ test("deveria realizar o login do usuario ao submeter o formulario a uma credenc
   renderRouter(<App />);
 
   const emailInput = screen.getByLabelText("E-mail");
-  const passwordInput = screen.getByLabelText("Senha");
-  const buttonEntrar = screen.getByRole("button");
-
   userEvent.type(emailInput, credentials.email);
-  userEvent.type(passwordInput, credentials.password);
-
   expect(emailInput.value).toBe(credentials.email);
+
+  const passwordInput = screen.getByLabelText("Senha");
+  userEvent.type(passwordInput, credentials.password);
   expect(passwordInput.value).toBe(credentials.password);
 
+  const buttonEntrar = screen.getByRole("button");
   userEvent.click(buttonEntrar);
-
   expect(buttonEntrar).toBeDisabled();
 
   await waitFor(() => {
@@ -84,17 +82,15 @@ test("não deveria realizar o login do usuario ao submeter o formulario a uma cr
   renderRouter(<App />);
 
   const emailInput = screen.getByLabelText("E-mail");
-  const passwordInput = screen.getByLabelText("Senha");
-  const buttonEntrar = screen.getByRole("button");
-
   userEvent.type(emailInput, credentials.email);
-  userEvent.type(passwordInput, credentials.password);
-
   expect(emailInput.value).toBe(credentials.email);
+
+  const passwordInput = screen.getByLabelText("Senha");
+  userEvent.type(passwordInput, credentials.password);
   expect(passwordInput.value).toBe(credentials.password);
 
+  const buttonEntrar = screen.getByRole("button");
   userEvent.click(buttonEntrar);
-
   expect(buttonEntrar).toBeDisabled();
 
   await waitFor(() => {
@@ -104,4 +100,25 @@ test("não deveria realizar o login do usuario ao submeter o formulario a uma cr
   });
 
   expect(buttonEntrar).toBeEnabled();
+});
+
+test("deveria renderizar a tela de login", () => {
+  renderRouter(<App />);
+
+  const emailInput = screen.getByLabelText("E-mail");
+  expect(emailInput).toBeInTheDocument();
+});
+
+test("deveria renderizar a tela de dashboard", () => {
+  const auth = {
+    user: {
+      name: "Nome do usuario da silva",
+    },
+  };
+
+  window.localStorage.setItem("auth", JSON.stringify(auth));
+
+  renderRouter(<App />);
+
+  expect(screen.getByText("Dashboard")).toBeInTheDocument();
 });
