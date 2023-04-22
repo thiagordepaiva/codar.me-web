@@ -1,12 +1,12 @@
 import * as React from "react";
-import axios from "axios";
 import * as yup from "yup";
 import { useFormik } from "formik";
 
+import { login } from "~/services/sdk";
 import { Box, Button, Field, Title, Link, useAuth } from "~/components";
 
 const validationSchema = yup.object().shape({
-  email: yup
+  username: yup
     .string()
     .required("O e-mail e obrigatório")
     .email("E necessário informar um e-mail valído"),
@@ -18,14 +18,12 @@ export const Login = () => {
 
   const onSubmit = async values => {
     try {
-      const res = await axios.get("http://localhost:3001/login", {
-        auth: {
-          username: values.email,
-          password: values.password,
-        },
+      const { user, token } = await login({
+        username: values.username,
+        password: values.password,
       });
 
-      setAuth(res.data);
+      setAuth({ user, token });
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -44,7 +42,7 @@ export const Login = () => {
     onSubmit,
     validationSchema,
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
@@ -61,11 +59,11 @@ export const Login = () => {
         <form onSubmit={handleSubmit}>
           <Field
             type="text"
-            name="email"
+            name="username"
             label="E-mail"
             placeholder="Digite seu e-mail"
-            value={values.email}
-            error={touched.email && errors.email}
+            value={values.username}
+            error={touched.username && errors.username}
             onChange={handleChange}
             onBlur={handleBlur}
             disabled={isSubmitting}
