@@ -39,6 +39,7 @@ export const Login = () => {
     handleBlur,
     handleSubmit,
     isSubmitting,
+    isValid,
   } = useFormik({
     onSubmit,
     validationSchema,
@@ -84,7 +85,12 @@ export const Login = () => {
           />
 
           <Box flexBox="column" center>
-            <Button type="submit" loading={isSubmitting} m={1}>
+            <Button
+              type="submit"
+              loading={isSubmitting}
+              disabled={!isValid}
+              m={1}
+            >
               Entrar
             </Button>
 
