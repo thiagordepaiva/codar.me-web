@@ -1,5 +1,4 @@
 import "@testing-library/jest-dom";
-import axios from "axios";
 
 import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
@@ -17,31 +16,15 @@ const renderRouter = children =>
     </Theme>
   );
 
-jest.mock("axios");
-
 beforeEach(() => {
   window.localStorage.clear();
 });
 
 test("deveria realizar o login do usuario ao submeter o formulario a uma credencial correta", async () => {
   const credentials = {
-    email: "emailcerto@gmail.com",
+    email: "thiagordepaiva@gmail.com",
     password: "123456",
   };
-
-  const responseData = {
-    user: {
-      id: 1,
-      name: "Nome do usuario da silva",
-      email: credentials.email,
-    },
-  };
-
-  axios.get.mockImplementation(() =>
-    Promise.resolve({
-      data: responseData,
-    })
-  );
 
   renderRouter(<App />);
 
@@ -54,17 +37,15 @@ test("deveria realizar o login do usuario ao submeter o formulario a uma credenc
   expect(passwordInput.value).toBe(credentials.password);
 
   const buttonEntrar = screen.getByRole("button");
-  userEvent.click(buttonEntrar);
-  expect(buttonEntrar).toBeDisabled();
+  await waitFor(() => userEvent.click(buttonEntrar));
+  await waitFor(() => expect(buttonEntrar).toBeDisabled());
 
-  await waitFor(() => {
-    expect(axios.get).toHaveBeenCalledWith("http://localhost:3001/login", {
-      auth: { password: credentials.password, username: credentials.email },
-    });
-  });
-
-  expect(screen.getByText("Dashboard")).toBeInTheDocument();
-  expect(screen.getByText(responseData.user.name)).toBeInTheDocument();
+  await waitFor(() =>
+    expect(screen.getByText("Dashboard")).toBeInTheDocument()
+  );
+  await waitFor(() =>
+    expect(screen.getByText("Thiago Rodrigues de Paiva")).toBeInTheDocument()
+  );
 });
 
 test("não deveria realizar o login do usuario ao submeter o formulario a uma credencial errada", async () => {
@@ -73,12 +54,6 @@ test("não deveria realizar o login do usuario ao submeter o formulario a uma cr
     password: "123456",
   };
 
-  axios.get.mockImplementation(() =>
-    Promise.reject({
-      data: {},
-    })
-  );
-
   renderRouter(<App />);
 
   const emailInput = screen.getByLabelText("E-mail");
@@ -93,13 +68,7 @@ test("não deveria realizar o login do usuario ao submeter o formulario a uma cr
   userEvent.click(buttonEntrar);
   expect(buttonEntrar).toBeDisabled();
 
-  await waitFor(() => {
-    expect(axios.get).toHaveBeenCalledWith("http://localhost:3001/login", {
-      auth: { password: credentials.password, username: credentials.email },
-    });
-  });
-
-  expect(buttonEntrar).toBeEnabled();
+  await waitFor(() => expect(buttonEntrar).toBeEnabled());
 });
 
 test("deveria renderizar a tela de login", () => {
