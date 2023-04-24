@@ -29,15 +29,17 @@ test("deveria realizar o login do usuario ao submeter o formulario a uma credenc
   renderRouter(<App />);
 
   const emailInput = screen.getByLabelText("E-mail");
-  userEvent.type(emailInput, credentials.email);
-  expect(emailInput.value).toBe(credentials.email);
-
   const passwordInput = screen.getByLabelText("Senha");
-  userEvent.type(passwordInput, credentials.password);
+  const buttonEntrar = screen.getByRole("button");
+
+  await waitFor(() => userEvent.type(emailInput, credentials.email));
+  await waitFor(() => userEvent.type(passwordInput, credentials.password));
+
+  expect(emailInput.value).toBe(credentials.email);
   expect(passwordInput.value).toBe(credentials.password);
 
-  const buttonEntrar = screen.getByRole("button");
   await waitFor(() => userEvent.click(buttonEntrar));
+
   await waitFor(() => expect(buttonEntrar).toBeDisabled());
 
   await waitFor(() =>
@@ -57,16 +59,18 @@ test("não deveria realizar o login do usuario ao submeter o formulario a uma cr
   renderRouter(<App />);
 
   const emailInput = screen.getByLabelText("E-mail");
-  userEvent.type(emailInput, credentials.email);
-  expect(emailInput.value).toBe(credentials.email);
-
   const passwordInput = screen.getByLabelText("Senha");
-  userEvent.type(passwordInput, credentials.password);
+  const buttonEntrar = screen.getByRole("button");
+
+  await waitFor(() => userEvent.type(emailInput, credentials.email));
+  await waitFor(() => userEvent.type(passwordInput, credentials.password));
+
+  expect(emailInput.value).toBe(credentials.email);
   expect(passwordInput.value).toBe(credentials.password);
 
-  const buttonEntrar = screen.getByRole("button");
-  userEvent.click(buttonEntrar);
-  expect(buttonEntrar).toBeDisabled();
+  await waitFor(() => userEvent.click(buttonEntrar));
+
+  await waitFor(() => expect(buttonEntrar).toBeDisabled());
 
   await waitFor(() => expect(buttonEntrar).toBeEnabled());
 });
